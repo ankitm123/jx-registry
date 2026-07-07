@@ -70,15 +70,15 @@ func NewCmdCreate() (*cobra.Command, *Options) {
 	if o.Context == nil {
 		o.Context = cmd.Context()
 	}
-	o.Options.EnvProcess()
+	o.EnvProcess()
 
-	o.Options.AddFlags(cmd)
+	o.AddFlags(cmd)
 
 	cmd.Flags().StringVarP(&o.Namespace, "namespace", "n", "", "The namespace. Defaults to the current namespace")
 	cmd.Flags().StringVarP(&o.ECRSuffix, "ecr-registry-suffix", "", ".amazonaws.com", "The registry suffix to check if we are using ECR")
 	cmd.Flags().StringVarP(&o.CacheSuffix, "cache-suffix", "", o.CacheSuffix, "If specified (or enabled via $CACHE_SUFFIX) we will make sure an ECR is created for the cache image too")
 
-	o.BaseOptions.AddBaseFlags(cmd)
+	o.AddBaseFlags(cmd)
 	return cmd, o
 }
 
@@ -132,7 +132,7 @@ func (o *Options) Run() error {
 		images = append(images, o.AppName+o.CacheSuffix)
 	}
 	for _, image := range images {
-		err = o.Options.LazyCreateRegistry(image)
+		err = o.LazyCreateRegistry(image)
 		if err != nil {
 			return fmt.Errorf("failed to lazy create the ECR registry for %s: %w", image, err)
 		}
