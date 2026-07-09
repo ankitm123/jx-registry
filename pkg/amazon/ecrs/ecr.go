@@ -176,7 +176,7 @@ func (o *Options) LazyCreateRegistry(appName string) error {
 	}
 	createResult, err := svc.CreateRepository(ctx, createRepoInput)
 	if err != nil {
-		return fmt.Errorf("Failed to create the ECR repository for %s due to: %s", repoName, err)
+		return fmt.Errorf("failed to create the ECR repository for %s due to: %s", repoName, err)
 	}
 	repo := createResult.Repository
 	if repo != nil {
@@ -208,7 +208,7 @@ func (o *Options) EnsureLifecyclePolicy(repoName string) error {
 			var notFoundErr *types.LifecyclePolicyNotFoundException
 			if !errors.As(err, &notFoundErr) {
 				// LifecyclePolicyNotFoundException is OK since we then create it below
-				return fmt.Errorf("Failed to fetch lifecycle policy for the ECR repository %s due to: %s",
+				return fmt.Errorf("failed to fetch lifecycle policy for the ECR repository %s due to: %s",
 					repoName, err)
 			}
 		}
@@ -228,7 +228,7 @@ func (o *Options) EnsureLifecyclePolicy(repoName string) error {
 		}
 		putLifecyclePolicyOutput, err := client.PutLifecyclePolicy(ctx, putLifecyclePolicyInput)
 		if err != nil {
-			return fmt.Errorf("Failed to put lifecycle policy '%s' for the ECR repository %s due to: %s",
+			return fmt.Errorf("failed to put lifecycle policy '%s' for the ECR repository %s due to: %s",
 				o.ECRLifecyclePolicy, repoName, err)
 		}
 		log.Logger().Infof("Put ECR repository lifecycle policy: %s", termcolor.ColorInfo(*putLifecyclePolicyOutput.LifecyclePolicyText))
@@ -256,7 +256,7 @@ func (o *Options) EnsureRepositoryPolicy(repoName string) error {
 	if err != nil {
 		var notFoundErr *types.RepositoryPolicyNotFoundException
 		if !errors.As(err, &notFoundErr) {
-			return fmt.Errorf("Failed to fetch lifecycle policy for the ECR repository %s due to: %s",
+			return fmt.Errorf("failed to fetch lifecycle policy for the ECR repository %s due to: %s",
 				repoName, err)
 		}
 	}
@@ -276,7 +276,7 @@ func (o *Options) EnsureRepositoryPolicy(repoName string) error {
 	}
 	setRegistryPolicyOutput, err := client.SetRepositoryPolicy(ctx, setRepositoryPolicyInput)
 	if err != nil {
-		return fmt.Errorf("Failed to set repository policy '%s' for the ECR repository %s due to: %s",
+		return fmt.Errorf("failed to set repository policy '%s' for the ECR repository %s due to: %s",
 			o.ECRRepositoryPolicy, repoName, err)
 	}
 	log.Logger().Infof("Put ECR repository repository policy: %s", termcolor.ColorInfo(*setRegistryPolicyOutput.PolicyText))
