@@ -1,6 +1,6 @@
 # Security Policy
 
-The Jenkins X project takes security seriously. We make every possible effort to ensure users can adequately secure their automation infrastructure. To that end, we work with Jenkins X platform and app developers, as well as security researchers, to fix security vulnerabilities in JayeX in a timely manner, and to improve the security of Jenkins X in general.
+The Jenkins X project takes security seriously. We make every possible effort to ensure users can adequately secure their automation infrastructure. To that end, we work with Jenkins X platform and app developers, as well as security researchers, to fix security vulnerabilities in Jenkins X in a timely manner, and to improve the security of Jenkins X in general.
 
 ## Supported Versions
 
